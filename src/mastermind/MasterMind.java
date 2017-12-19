@@ -5,17 +5,23 @@
  */
 package mastermind;
 
+import mastermind.model.Message;
+import java.util.Map;
+
 /**
  *
  * @author Romain
  */
 public class MasterMind {
 
+    Message message = new Message();
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        displayMessage welcome = new displayMessage();
+        welcome.Welcome();
+        welcome.Menu();
     }
-    
 }
