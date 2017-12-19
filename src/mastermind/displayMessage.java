@@ -6,6 +6,7 @@
 package mastermind;
 import java.util.Map;
 import java.util.Scanner;
+import mastermind.model.DBConnection;
 import mastermind.model.Message;
 
 /**
@@ -15,6 +16,8 @@ import mastermind.model.Message;
 public class displayMessage {
 
     Message message = new Message();
+    Scanner sc = new Scanner(System.in);
+    DBConnection dbco = new DBConnection();
     
     public displayMessage() {
     }
@@ -28,6 +31,23 @@ public class displayMessage {
         for (int i = 0; i <= map.size(); i++) {
             System.out.println(map.get(i));
         }
+        dbco.Initialize();
+        SeConnecter();
+        
+    }
+    
+    public void SeConnecter() {
+      System.out.println("Veuillez saisir votre login :");
+        String login = sc.nextLine();
+        System.out.println("Veuillez saisir votre mot de passe :");
+        String password = sc.nextLine();
+        while(!dbco.VerifConnection(login, password)){
+            System.out.println("Veuillez saisir votre login :");
+            login = sc.nextLine();
+            System.out.println("Veuillez saisir votre mot de passe :");
+            password = sc.nextLine();
+        }
+        //Menu();
     }
     
     public void Menu() {

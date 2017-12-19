@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mastermind;
+package mastermind.model;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.Scanner;
 
 
 /**

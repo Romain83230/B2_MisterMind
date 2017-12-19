@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import mastermind.model.Message;
 import java.util.Map;
+import mastermind.model.DBConnection;
 
 /**
  *
@@ -22,14 +23,15 @@ public class MasterMind {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         // TODO code application logic here
-		displayMessage welcome = new displayMessage();
+	displayMessage welcome = new displayMessage();
         welcome.Welcome();
         welcome.Menu();
-		 /*System.out.println("Veuillez saisir un mot :");
+	/*	 /*System.out.println("Veuillez saisir un mot :");
         String entree = sc.nextLine();
         System.out.println("Vous avez saisi : " + entree);*/
-        DBConnection dbco = new DBConnection();
+        /*DBConnection dbco = new DBConnection();
         dbco.Initialize();
         System.out.println("Veuillez saisir votre login :");
         String login = sc.nextLine();
@@ -40,6 +42,6 @@ public class MasterMind {
             login = sc.nextLine();
             System.out.println("Veuillez saisir votre mot de passe :");
             password = sc.nextLine();
-        }
+        }*/
     }
 }
