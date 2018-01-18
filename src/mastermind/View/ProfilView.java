@@ -5,11 +5,17 @@
  */
 package mastermind.View;
 
+import mastermind.Controller.AbstractController;
+
 /**
  *
  * @author ferre
  */
 public class ProfilView extends AbstractView {
+
+    public ProfilView(AbstractController controlleur) {
+        super(controlleur);
+    }
     
     @Override
     public void displayMessage() {

@@ -5,11 +5,17 @@
  */
 package mastermind.View;
 
+import mastermind.Controller.AbstractController;
+
 /**
  *
  * @author ferre
  */
 public class UserplayerView extends AbstractView {
+
+    public UserplayerView(AbstractController controlleur) {
+        super(controlleur);
+    }
     
     @Override
     public void displayMessage() {

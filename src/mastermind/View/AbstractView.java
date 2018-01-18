@@ -12,9 +12,10 @@ import mastermind.Controller.AbstractController;
  * @author ferre
  */
 public abstract class AbstractView {
-    private AbstractController Action;
+    public AbstractController Action;
     
-    public AbstractView() {
+    public AbstractView(AbstractController controlleur) {
+        this.Action = controlleur;
         this.displayMessage();
     }
     

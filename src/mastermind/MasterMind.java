@@ -14,21 +14,22 @@ import mastermind.Controller.*;
 public class MasterMind {
     static String nomJoueur;
     static AbstractController CurrentAction;
+    static boolean logged;
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         boolean exit = false;
-        CurrentAction = new Menu();
-        nomJoueur = CurrentAction.getName();
+        CurrentAction = new Menu(", vous n'êtes pas authentifié",false);
         while(!exit) {
             int action = CurrentAction.decision;
-            //System.out.println(action);
-            if (action == 6) {
-                exit = true;
-            } else {
+            nomJoueur = " " + CurrentAction.getName();
+            logged = CurrentAction.islogged();
+            if (action != 6) {
                 call(action);
+            } else {
+                exit = true;
             }
         }
         System.exit(0);
@@ -37,28 +38,28 @@ public class MasterMind {
     public static void call(int choix) {
         switch(choix) {
             case 1:
-                CurrentAction = new GameUserplayer();
+                CurrentAction = new GameUserplayer(nomJoueur,logged);
               break;
             case 2:
-                CurrentAction = new GameUsermaster();
+                CurrentAction = new GameUsermaster(nomJoueur,logged);
               break;
             case 3:
-                CurrentAction = new GetProfil();
+                CurrentAction = new GetProfil(nomJoueur,logged);
               break;
             case 4:
-                CurrentAction = new UpdateProfil();
+                CurrentAction = new UpdateProfil(nomJoueur,logged);
               break;
             case 5:
-                CurrentAction = new GetStats();
+                CurrentAction = new GetStats(nomJoueur,logged);
               break;
             case 7:
-                CurrentAction = new Signin();
+                CurrentAction = new Signin(nomJoueur,logged);
               break;
             case 8:
-                CurrentAction = new Login();
+                CurrentAction = new Login(nomJoueur,logged);
               break;
             default:
-                CurrentAction = new Menu();
+                CurrentAction = new Menu(nomJoueur,logged);
               break;
         }
     }

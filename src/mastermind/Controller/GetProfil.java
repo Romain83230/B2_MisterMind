@@ -11,8 +11,12 @@ import mastermind.View.*;
  * @author ferre
  */
 public class GetProfil extends AbstractController{
+
+    public GetProfil(String nom, boolean auth) {
+        super(nom, auth);
+    }
     @Override
     public void perform() {
-        this.setView(new ProfilView());
+        this.setView(new ProfilView(this));
     }
 }

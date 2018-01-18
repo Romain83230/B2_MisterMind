@@ -11,8 +11,12 @@ import mastermind.View.*;
  * @author ferre
  */
 public class Login extends AbstractController{
+
+    public Login(String nom, boolean auth) {
+        super(nom, auth);
+    }
     @Override
     public void perform() {
-        this.setView(new LoginView());
+        this.setView(new LoginView(this));
     }
 }

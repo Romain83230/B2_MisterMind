@@ -12,8 +12,12 @@ import mastermind.View.*;
  * @author ferre
  */
 public class GameUsermaster extends AbstractController{
+
+    public GameUsermaster(String nom, boolean auth) {
+        super(nom, auth);
+    }
     @Override
     public void perform() {
-        this.setView(new UsermasterView());
+        this.setView(new UsermasterView(this));
     }
 }

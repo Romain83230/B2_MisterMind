@@ -21,10 +21,12 @@ public abstract class AbstractController {
     private String session;
     public Scanner input;
     
-    public AbstractController() {
-        input = new Scanner(System.in);
+    public AbstractController(String nom, boolean auth) {
+        this.logged = auth;
+        this.session = nom;
         this.View = null;
         this.Database = new DBConnection();
+        input = new Scanner(System.in);
         this.perform();
     }
     
@@ -41,11 +43,8 @@ public abstract class AbstractController {
     }
     
     public void setSession(String nom) {
-        this.session = nom;
         this.logged = true;
     }
     
     abstract public void perform();
-
-
 }

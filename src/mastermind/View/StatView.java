@@ -5,11 +5,17 @@
  */
 package mastermind.View;
 
+import mastermind.Controller.AbstractController;
+
 /**
  *
  * @author ferre
  */
 public class StatView extends AbstractView {
+
+    public StatView(AbstractController controlleur) {
+        super(controlleur);
+    }
     
     @Override
     public void displayMessage() {

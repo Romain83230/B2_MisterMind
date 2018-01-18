@@ -5,14 +5,21 @@
  */
 package mastermind.View;
 
+import mastermind.Controller.AbstractController;
+
 /**
  *
  * @author ferre
  */
 public class MenuView extends AbstractView {
+
+    public MenuView(AbstractController controlleur) {
+        super(controlleur);
+    }
     
     @Override
     public void displayMessage() {
+        System.out.println("Bonjour" + Action.getName());
         System.out.println("1 : Je choisis la combinaison, vous jouez");
         System.out.println("2 : Vous choisissez la combinaison, je joue");
         System.out.println("3 : Afficher votre profil");
