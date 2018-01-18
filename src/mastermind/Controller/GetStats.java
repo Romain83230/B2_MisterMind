@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mastermind.Controller;
+import mastermind.View.*;
 
 /**
  *
@@ -12,6 +13,6 @@ package mastermind.Controller;
 public class GetStats extends AbstractController{
     @Override
     public void perform() {
-        
+        this.setView(new StatView());
     }
 }

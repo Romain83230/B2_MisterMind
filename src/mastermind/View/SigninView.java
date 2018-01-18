@@ -13,6 +13,6 @@ public class SigninView extends AbstractView {
     
     @Override
     public void displayMessage() {
-        
+        System.out.println("Page d'inscription");
     }
 }

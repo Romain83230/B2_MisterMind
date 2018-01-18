@@ -9,10 +9,10 @@ package mastermind.View;
  *
  * @author ferre
  */
-public class ProfilView extends AbstractView {
+public class StatView extends AbstractView {
     
     @Override
     public void displayMessage() {
-        System.out.println("page de profil");
+        System.out.println("Page de stat");
     }
 }

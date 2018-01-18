@@ -13,6 +13,6 @@ public class UpdateprofilView extends AbstractView {
     
     @Override
     public void displayMessage() {
-        
+        System.out.println("page de modification du profil");
     }
 }

@@ -5,6 +5,8 @@
  */
 package mastermind.Controller;
 
+import mastermind.View.*;
+
 /**
  *
  * @author ferre
@@ -12,6 +14,6 @@ package mastermind.Controller;
 public class GameUsermaster extends AbstractController{
     @Override
     public void perform() {
-        
+        this.setView(new UsermasterView());
     }
 }

@@ -5,8 +5,6 @@
  */
 package mastermind.View;
 
-import mastermind.Controller.AbstractController;
-
 /**
  *
  * @author ferre
@@ -15,6 +13,6 @@ public class UserplayerView extends AbstractView {
     
     @Override
     public void displayMessage() {
-        
+        System.out.println("Jeu, la machine choisi la combinaison");
     }
 }
