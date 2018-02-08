@@ -16,8 +16,13 @@ public abstract class AbstractView {
     
     public AbstractView(AbstractController controlleur) {
         this.Action = controlleur;
-        this.displayMessage();
+        this.displayDefaultMessage();
     }
     
-    public abstract void displayMessage();
+    public void send(String message) {
+        System.out.println(message);
+        System.out.println();
+    }
+    
+    public abstract void displayDefaultMessage();
 }

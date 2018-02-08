@@ -18,7 +18,7 @@ public class SigninView extends AbstractView {
     }
     
     @Override
-    public void displayMessage() {
+    public void displayDefaultMessage() {
         System.out.println("Page d'inscription");
     }
 }

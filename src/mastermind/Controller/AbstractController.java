@@ -26,12 +26,16 @@ public abstract class AbstractController {
         this.session = nom;
         this.View = null;
         this.Database = new DBConnection();
-        input = new Scanner(System.in);
+        this.input = new Scanner(System.in);
         this.perform();
     }
     
     public void setView(AbstractView Vue) {
         this.View = Vue;
+    }
+    
+    public AbstractView getView() {
+        return this.View;
     }
     
     public boolean islogged() {

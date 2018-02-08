@@ -18,7 +18,7 @@ public class StatView extends AbstractView {
     }
     
     @Override
-    public void displayMessage() {
+    public void displayDefaultMessage() {
         System.out.println("Page de stat");
     }
 }

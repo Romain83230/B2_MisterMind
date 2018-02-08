@@ -18,7 +18,7 @@ public class LoginView extends AbstractView {
     }
     
     @Override
-    public void displayMessage() {
+    public void displayDefaultMessage() {
         System.out.println("page de login");
     }
 }

@@ -24,7 +24,7 @@ public class MasterMind {
         CurrentAction = new Menu(", vous n'êtes pas authentifié",false);
         while(!exit) {
             int action = CurrentAction.decision;
-            nomJoueur = " " + CurrentAction.getName();
+            nomJoueur = CurrentAction.getName();
             logged = CurrentAction.islogged();
             if (action != 6) {
                 call(action);

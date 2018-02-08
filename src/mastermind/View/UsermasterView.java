@@ -18,7 +18,9 @@ public class UsermasterView extends AbstractView {
     }
     
     @Override
-    public void displayMessage() {
-        System.out.println("Jeu, l'utilisateur choisi la combinaison");
+    public void displayDefaultMessage() {
+        System.out.println("À vous de jouer!");
+        System.out.println("Choisissez une combinaison, cette combinaison doit être composée de cinq chiffres différents, et ne peut pas contenir de zéros");
+        System.out.print("Entrez une combinaison : ");
     }
 }

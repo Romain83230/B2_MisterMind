@@ -18,7 +18,7 @@ public class UserplayerView extends AbstractView {
     }
     
     @Override
-    public void displayMessage() {
+    public void displayDefaultMessage() {
         System.out.println("Jeu, la machine choisi la combinaison");
     }
 }
