@@ -18,5 +18,16 @@ public class Login extends AbstractController{
     @Override
     public void perform() {
         this.setView(new LoginView(this));
+        
+        String login = this.input.nextLine();
+        this.getView().send("Veuillez saisir votre mot de passe :");
+        String password = this.input.nextLine();
+        while(!this.Database.VerifConnection(login, password)){
+            this.getView().send("Veuillez saisir votre login :");
+            login = this.input.nextLine();
+            this.getView().send("Veuillez saisir votre mot de passe :");
+            password = this.input.nextLine();
+        }
+        this.setSession(login);
     }
 }

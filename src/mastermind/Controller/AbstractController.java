@@ -14,9 +14,9 @@ import mastermind.View.AbstractView;
  * @author ferre
  */
 public abstract class AbstractController {
-    public int decision;
+    public String decision;
     private AbstractView View;
-    private DBConnection Database;
+    protected DBConnection Database;
     private boolean logged;
     private String session;
     public Scanner input;
@@ -47,6 +47,7 @@ public abstract class AbstractController {
     }
     
     public void setSession(String nom) {
+        this.session = nom;
         this.logged = true;
     }
     
