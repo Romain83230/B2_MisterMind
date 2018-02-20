@@ -35,7 +35,7 @@ public class UpdateProfil extends AbstractController{
         if(mail.equals("")){
            mail = profil.getMail();
         }
-
+        
         this.Database.UpdateProfil(this.getName(), mail, password);
     }
 }

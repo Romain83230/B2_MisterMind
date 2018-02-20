@@ -1,7 +1,10 @@
 package mastermind.Controller;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mastermind.View.*;
 
 
@@ -42,6 +45,7 @@ public class GameUserplayer extends AbstractController{
             tourParTout(finPartie);
             
             if (finPartie == 9) {
+                AjouterStat(finPartie, false);
                 vousAvezPerdu(randomValues);
                 break;
             }
@@ -49,6 +53,7 @@ public class GameUserplayer extends AbstractController{
             if (gagne) {
                 this.getView().send("Félicitation ! Vous avez trouvé la bonne combinaison :) ");
                 this.getView().send("C'était bien : " + foo);
+                AjouterStat(finPartie, true);
                 break;
             }
             finPartie++;
@@ -166,5 +171,13 @@ public class GameUserplayer extends AbstractController{
         }
         result = blanc + "B/" + noir + "N.";
         return result;
+    }
+    
+    private void AjouterStat(int nombreCoup, boolean gagner){
+        try {
+            Database.AddStat(nombreCoup, gagner, this.getName());
+        } catch (SQLException ex) {
+            Logger.getLogger(GameUserplayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

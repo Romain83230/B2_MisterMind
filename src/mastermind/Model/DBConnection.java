@@ -55,7 +55,7 @@ public final class DBConnection {
                 st.executeUpdate(sql);
                 sql = "CREATE TABLE statistiques\n"
                         + "(\n"
-                        + "     id INT PRIMARY KEY NOT NULL,\n"
+                        + "    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n"
                         + "    parties_jouees INT(5) NOT NULL,\n"
                         + "    parties_win INT(3) NOT NULL,\n"
                         + "    parties_lose INT(3) NOT NULL,\n"
@@ -159,12 +159,12 @@ public final class DBConnection {
     }
 
     //SELECT PRECIS SUR UN JOUEUR
-    public String Select(String adj, String table, String colonne, String id) {
+    public String Select(String adj, String table, String id) {
         ResultSetMetaData rsmd = null;
         String word = "";
         try {
             OpenConnection();
-            if (st.execute("SELECT " + adj + " FROM" + table + "WHERE " + colonne + " = '" + id + "';")) {
+            if (st.execute("SELECT " + adj + " FROM " + table + " WHERE login = '" + id + "';")) {
                 rs = st.getResultSet();
                 rsmd = rs.getMetaData();
                 while (rs.next()) {
@@ -215,6 +215,9 @@ public final class DBConnection {
             if (st.execute("INSERT INTO joueur VALUES('" + login + "', '" + nom + "', '" + prenom + "', '" + password + "', '" + email + "', '" + annee + "-" + mois + "-" + jour + "')")) {
                 System.out.println("Inscription réussie");
             }
+            if (st.execute("INSERT INTO statistiques VALUES(id,'0','0','0','0','2018-02-01','0','"+ login + "')")) {
+                System.out.println("Inscription réussie");
+            }
         } catch (SQLException ex) {
             System.out.println("SQLException Insert: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -237,6 +240,22 @@ public final class DBConnection {
             }
         } catch (SQLException ex) {
         }
+        CloseConnection();
+    }
+    
+    public void AddStat(int nombreCoup, boolean gagner, String login) throws SQLException {
+        OpenConnection();
+        if(gagner){
+            if (st.execute("UPDATE statistiques SET parties_jouees='parties_jouees + 1', parties_win='parties_win + 1' WHERE login='" + login + "';")) {
+                System.out.println("Informations mises à jour");
+            }
+        }
+        else{
+            if (st.execute("UPDATE statistiques SET parties_jouees='parties_jouees + 1', parties_lose='parties_lose + 1' WHERE login='" + login + "';")) {
+                System.out.println("Informations mises à jour");
+            }
+        }
+        
         CloseConnection();
     }
 
