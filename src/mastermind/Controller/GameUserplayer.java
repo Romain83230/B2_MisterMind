@@ -4,74 +4,56 @@
  * and open the template in the editor.
  */
 package mastermind.Controller;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import mastermind.View.*;
 
-
 /**
+ * Code gérant la partie ou l'ordi choisi une combinaison, nous jouons. Les
+ * doublons sont possibles
  *
- * @author ferre
+ * @author romain
  */
-public class GameUserplayer extends AbstractController{
-    boolean integrity;
+public class GameUserplayer extends AbstractController {
+
     int[] valJoueur, valOrdi;
-    List liste ;
+    List liste;
     int[] randomValues = new int[5];
     String result;
     boolean gagne = false;
     int foo = 0;
 
+    /**
+     *
+     * @param nom
+     * @param auth
+     */
     public GameUserplayer(String nom, boolean auth) {
         super(nom, auth);
     }
+
+    /**
+     *
+     */
     @Override
     public void perform() {
         this.setView(new UserplayerView(this));
         this.serieADeviner();
     }
-    
-        public String checkintegrity(char[] tableau) {
-        
-        if(tableau.length != 5) {
-            this.integrity = false;
-            return "La combinaison rentrée n'a pas la bonne longueur.";
-        }
-        
-        
-        for(int i = 0; i < tableau.length; i++ ) {
-            int a = Character.getNumericValue(tableau[i]);
-            if(a < 1 || a > 9){
-                this.integrity = false;
-                return "Vous devez n'entrer que des chiffres entre 1 et 9.";
-            }
-        }
-        
-        char[] alreadyused = {tableau[0],'0','0','0','0'};
-        for(int i = 1; i < tableau.length - 1; i++ ) {
-            for(int j = 0; j < alreadyused.length; j++) {
-                if(tableau[i] == alreadyused[j]){
-                    this.integrity = false;
-                    return "Chaque chiffre droit être différent.";
-                }
-                alreadyused[i] = tableau[i - 1];
-            }
-            
-        }
-        this.integrity = true;
-        return "";
-    }
-        
-        
-         public void serieADeviner() {
+
+    /**
+     * function qui génére les valeurs à deviner, et qui continue le jeu tant que le joueur n'a pas trouvé, qu'il a trouvé, ou qu'il a perdu.
+     */
+    public void serieADeviner() {
         liste = new LinkedList();
-        randomValues = genererFourValues();
+        randomValues = genererFiveValues();
         int finPartie = 0;
         liste.add("                   XXXXX                    ");
         while (finPartie != 10) {
             tourParTout(finPartie);
-            
+
             if (finPartie == 9) {
                 vousAvezPerdu(randomValues);
                 break;
@@ -84,21 +66,29 @@ public class GameUserplayer extends AbstractController{
             }
             finPartie++;
             displayJoueurJoue(liste);
-        }        
+        }
     }
-         
-         public static int[] genererFourValues(){
+    
+    
+/**
+ * Génère un tableau contenant les valeurs aléatoires. 
+ * @return 
+ */
+    public static int[] genererFiveValues() {
         int[] values = new int[5];
         Random rand = new Random();
-        
+
         for (int i = 0; i < values.length; i++) {
-            values[i] = rand.nextInt((4) + 1) + 1;
+            values[i] = rand.nextInt((8) + 1) + 1;
         }
-        
+
         return values;
     }
-    
-    
+
+    /**
+     * Gére tour par tour l'entrée du joueur, et appelle la fonction qui doit analyser les entrées de l'utilisateurs. 
+     * @param tour 
+     */
     public void tourParTout(int tour) {
         String choixUser = "";
 
@@ -109,14 +99,19 @@ public class GameUserplayer extends AbstractController{
         } while (!checkInput(choixUser));
 
         foo = Integer.parseInt(choixUser);
-        result = checkInput(foo, randomValues);           
-        liste.add("            "+(tour + 1)+" : " + foo + " => " + result +  "   ");
+        result = checkInput(foo, randomValues);
+        liste.add("            " + (tour + 1) + " : " + foo + " => " + result + "   ");
 
         if ("5B/0N.".equals(result)) {
             gagne = true;
         }
     }
-    
+
+    /**
+     * Fonction de test servant à tester ce que l'utilisateur entre. 
+     * @param choixUser
+     * @return 
+     */
     private boolean checkInput(String choixUser) {
         boolean check = false;
         if (choixUser.length() < 5 || choixUser.length() > 5) {
@@ -133,14 +128,17 @@ public class GameUserplayer extends AbstractController{
         }
         return check;
     }
-    
+
+    /**
+     * fonction servant à afficher les résultats. Les strings sont envoyés à la view. 
+     * @param val 
+     */
     public void displayJoueurJoue(List val) {
         for (int i = 0; i < val.size(); i++) {
             this.getView().send(val.get(i).toString());
         }
     }
-    
-    
+
     /**
      * Appelé si uniquement le joueur n'a pas réussi à trouver la suite avant la
      * fin des 10 tours.
@@ -155,13 +153,9 @@ public class GameUserplayer extends AbstractController{
         }
         this.getView().send(goodAnswer);
         this.getView().send("================================================");
-        
+
 //        exit(0);
     }
-    
-    
-    
-    
 
     /**
      * Check les propositions du joueur. 3 possibilités : aucune bonne réponse.
@@ -186,11 +180,11 @@ public class GameUserplayer extends AbstractController{
 
         for (int i = 0; i < ordi.length; i++) {
             if (choixJoueur[i] == ordi[i]) {
-                    blanc++;
-                    continue;
-                }
+                blanc++;
+                continue;
+            }
             for (int j = 0; j < ordi.length; j++) {
-                
+
                 if (choixJoueur[i] == ordi[j] && choixJoueur[j] == ordi[i]) {
                     noir++;
                 }
@@ -199,5 +193,5 @@ public class GameUserplayer extends AbstractController{
         result = blanc + "B/" + noir + "N.";
         return result;
     }
-        
+
 }
