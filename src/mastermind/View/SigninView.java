@@ -12,13 +12,17 @@ import mastermind.Controller.AbstractController;
  * @author ferre
  */
 public class SigninView extends AbstractView {
-
-    public SigninView(AbstractController controlleur) {
-        super(controlleur);
+    
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param controleur Le contrôleur de la fonctionnalité correspondante.
+     */
+    public SigninView(AbstractController controleur) {
+        super(controleur);
     }
     
     @Override
     public void displayDefaultMessage() {
-        System.out.println("Page d'inscription");
+        this.send("Page d'inscription");
     }
 }

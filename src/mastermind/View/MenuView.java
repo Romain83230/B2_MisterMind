@@ -8,37 +8,37 @@ package mastermind.View;
 import mastermind.Controller.AbstractController;
 
 /**
- * Vue de la fonctionalité 
+ * Vue de la fonctionalité Menu
  * @author ferre
  */
 public class MenuView extends AbstractView {
 
     /**
-     * 
-     * @param controlleur 
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param controleur Le contrôleur de la fonctionnalité correspondante.
      */
-    public MenuView(AbstractController controlleur) {
-        super(controlleur);
+    public MenuView(AbstractController controleur) {
+        super(controleur);
     }
     
     /**
-     * 
+     * Affiche le menu en y insérant le nom de l'utilisateur. Si le joueur est identifié, il n'aura pas le même menu.
      */
     @Override
     public void displayDefaultMessage() {
-        System.out.println("Bonjour " + Action.getName());
+        this.send("Bonjour, " + Action.getName() + "!");
         
         if(this.Action.islogged()) {
-            System.out.println("1 : Je choisis la combinaison, vous jouez");
-            System.out.println("2 : Vous choisissez la combinaison, je joue");
-            System.out.println("3 : Afficher votre profil");
-            System.out.println("4 : Modifier vos informations");
-            System.out.println("5 : Afficher les statistiques");
-            System.out.println("6 : quitter");
+            this.send("1 : Je choisis la combinaison, vous jouez");
+            this.send("2 : Vous choisissez la combinaison, je joue");
+            this.send("3 : Afficher votre profil");
+            this.send("4 : Modifier vos informations");
+            this.send("5 : Afficher les statistiques");
+            this.send("6 : quitter");
         } else {
-            System.out.println("1 : Je m'inscris");
-            System.out.println("2 : Je me connecte");
-            System.out.println("3 : quitter");
+            this.send("1 : Je m'inscris");
+            this.send("2 : Je me connecte");
+            this.send("3 : quitter");
         }
             
 

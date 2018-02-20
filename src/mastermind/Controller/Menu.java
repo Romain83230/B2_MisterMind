@@ -7,6 +7,11 @@ import mastermind.View.*;
  */
 public class Menu extends AbstractController{
 
+    /**
+    * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+    * @param nom le nom de l'utilisateur.
+    * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+    */
     public Menu(String nom, boolean auth) {
         super(nom, auth);
     }
@@ -20,6 +25,9 @@ public class Menu extends AbstractController{
         String choix = this.input.nextLine();
         if(this.islogged()) {
             this.decision = choix;
+            if(decision.equals("7") || decision.equals("8")) {
+                this.decision = "0";
+            }
         } else {
             if("1".equals(choix)) {
                 this.decision = "7";

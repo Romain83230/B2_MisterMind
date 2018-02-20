@@ -12,9 +12,13 @@ import mastermind.Controller.AbstractController;
  * @author ferre
  */
 public class ProfilView extends AbstractView {
-
-    public ProfilView(AbstractController controlleur) {
-        super(controlleur);
+    
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param controleur Le contrôleur de la fonctionnalité correspondante.
+     */
+    public ProfilView(AbstractController controleur) {
+        super(controleur);
     }
     
     @Override

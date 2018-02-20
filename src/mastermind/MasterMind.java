@@ -17,7 +17,7 @@ public class MasterMind {
      */
     public static void main(String[] args) {
         boolean exit = false;
-        CurrentAction = new Menu(", vous n'êtes pas authentifié",false);
+        CurrentAction = new Menu("vous n'êtes pas authentifié",false);
         while(!exit) {
             String action;
             try{

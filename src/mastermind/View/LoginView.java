@@ -13,8 +13,12 @@ import mastermind.Controller.AbstractController;
  */
 public class LoginView extends AbstractView {
 
-    public LoginView(AbstractController controlleur) {
-        super(controlleur);
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param controleur Le contrôleur de la fonctionnalité correspondante.
+     */
+    public LoginView(AbstractController controleur) {
+        super(controleur);
     }
     
     @Override

@@ -23,7 +23,7 @@ public class GetProfil extends AbstractController{
         this.getView().send("Nom : " + Database.Select("nom", this.getName()));
         this.getView().send("Prénom : " + Database.Select("prenom", this.getName()));
         this.getView().send("Email : " + Database.Select("email", this.getName()));
-        this.getView().send("Appuyez sur une 'entrée' pour continuer.");
+        this.getView().send("Appuyez sur 'entrée' pour continuer.");
         input.nextLine();
     }
     

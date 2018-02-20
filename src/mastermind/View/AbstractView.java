@@ -26,7 +26,7 @@ public abstract class AbstractView {
     
     /**
      * Affiche un message à l'écran.
-     * Étant donné que l'application est ici un programme en console, cette méthode n'est pas bien différente d'un simple System.out.println().
+     * Étant donné que l'application est ici un programme en console, cette méthode n'est pas différente d'un simple System.out.println().
      * L'avantage majeur ici est que dans le cas où l'on décide de faire une nouvelle interface graphique, seule cette fonction serait à modifier, car toutes les méthodes qui doivent afficher à l'écran utilisent cette méthode.
      * @param message Le message à afficher.
      */
