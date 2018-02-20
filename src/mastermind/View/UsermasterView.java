@@ -17,9 +17,13 @@ public class UsermasterView extends AbstractView {
         super(controlleur);
     }
     
+    /**
+     *
+     */
     @Override
     public void displayDefaultMessage() {
         System.out.println("À vous de jouer!");
         System.out.println("Choisissez une combinaison, cette combinaison doit être composée de cinq chiffres différents, et ne peut pas contenir de zéros");
+        System.out.println("Envoyez votre réponse au format 'xBP/yMP'");
     }
 }

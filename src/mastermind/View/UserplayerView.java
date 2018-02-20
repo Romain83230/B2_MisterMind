@@ -12,11 +12,18 @@ import mastermind.Controller.AbstractController;
  * @author ferre
  */
 public class UserplayerView extends AbstractView {
-
+    
+    /**
+     * 
+     * @param controlleur 
+     */
     public UserplayerView(AbstractController controlleur) {
         super(controlleur);
     }
     
+    /**
+     * 
+     */
     @Override
     public void displayDefaultMessage() {
         System.out.println("Jeu, la machine choisi la combinaison");
