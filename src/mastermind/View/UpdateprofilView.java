@@ -19,6 +19,7 @@ public class UpdateprofilView extends AbstractView {
     
     @Override
     public void displayDefaultMessage() {
-        System.out.println("page de modification du profil");
+        System.out.println("");
+        System.out.println("Voici vos informations actuelles");
     }
 }

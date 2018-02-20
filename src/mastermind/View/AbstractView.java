@@ -25,6 +25,4 @@ public abstract class AbstractView {
     }
     
     public abstract void displayDefaultMessage();
-
-
 }

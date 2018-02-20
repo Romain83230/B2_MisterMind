@@ -19,7 +19,7 @@ public class MenuView extends AbstractView {
     
     @Override
     public void displayDefaultMessage() {
-        System.out.println("Bonjour" + Action.getName());
+        System.out.println("Bonjour " + Action.getName());
         
         if(this.Action.islogged()) {
             System.out.println("1 : Je choisis la combinaison, vous jouez");

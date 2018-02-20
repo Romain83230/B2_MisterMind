@@ -16,7 +16,7 @@ import mastermind.View.AbstractView;
 public abstract class AbstractController {
     public String decision;
     private AbstractView View;
-    private DBConnection Database;
+    protected DBConnection Database;
     private boolean logged;
     private String session;
     public Scanner input;

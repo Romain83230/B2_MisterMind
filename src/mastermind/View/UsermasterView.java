@@ -20,9 +20,6 @@ public class UsermasterView extends AbstractView {
     @Override
     public void displayDefaultMessage() {
         System.out.println("À vous de jouer!");
-        System.out.println("Choisissez une combinaison, cette combinaison doit être composée de cinq chiffres différents, et ne peut pas contenir de zéros.");
-        System.out.println("Notez la combinaison de coté.");
-        System.out.println("");
-        System.out.println("Je vais vous demander les combinaisons, vous devrez y répondre en indiquant le nombre de bons placements et le nombre de chiffres présents mais mal placés sous le format xBP/yMP");
+        System.out.println("Choisissez une combinaison, cette combinaison doit être composée de cinq chiffres différents, et ne peut pas contenir de zéros");
     }
 }
