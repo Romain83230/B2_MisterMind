@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mastermind.Controller;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,56 +10,30 @@ import mastermind.View.*;
  * @author ferre
  */
 public class GameUserplayer extends AbstractController{
-    boolean integrity;
     int[] valJoueur, valOrdi;
     List liste ;
-    int[] randomValues = new int[5];
+    int[] randomValues;
     String result;
-    boolean gagne = false;
+    boolean gagne;
     int foo = 0;
-
+    
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param nom le nom de l'utilisateur.
+     * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+     */
     public GameUserplayer(String nom, boolean auth) {
         super(nom, auth);
     }
     @Override
     public void perform() {
         this.setView(new UserplayerView(this));
+        randomValues = new int[5];
+        gagne = false;
         this.serieADeviner();
     }
-    
-        public String checkintegrity(char[] tableau) {
-        
-        if(tableau.length != 5) {
-            this.integrity = false;
-            return "La combinaison rentrée n'a pas la bonne longueur.";
-        }
-        
-        
-        for(int i = 0; i < tableau.length; i++ ) {
-            int a = Character.getNumericValue(tableau[i]);
-            if(a < 1 || a > 9){
-                this.integrity = false;
-                return "Vous devez n'entrer que des chiffres entre 1 et 9.";
-            }
-        }
-        
-        char[] alreadyused = {tableau[0],'0','0','0','0'};
-        for(int i = 1; i < tableau.length - 1; i++ ) {
-            for(int j = 0; j < alreadyused.length; j++) {
-                if(tableau[i] == alreadyused[j]){
-                    this.integrity = false;
-                    return "Chaque chiffre droit être différent.";
-                }
-                alreadyused[i] = tableau[i - 1];
-            }
-            
-        }
-        this.integrity = true;
-        return "";
-    }
-        
-        
-         public void serieADeviner() {
+       
+    public void serieADeviner() {
         liste = new LinkedList();
         randomValues = genererFourValues();
         int finPartie = 0;
@@ -87,7 +56,7 @@ public class GameUserplayer extends AbstractController{
         }        
     }
          
-         public static int[] genererFourValues(){
+        public static int[] genererFourValues(){
         int[] values = new int[5];
         Random rand = new Random();
         
@@ -149,11 +118,10 @@ public class GameUserplayer extends AbstractController{
         displayJoueurJoue(liste);
         this.getView().send("=============Vous avez perdu...==============");
         this.getView().send("========La bonne combinaison était :=========");
-        String goodAnswer = "";
+        this.getView().send("                    ");
         for (int i = 0; i < val.length; i++) {
-            goodAnswer += (val[i] + " ");
+            this.getView().send(val[i] + " ");
         }
-        this.getView().send(goodAnswer);
         this.getView().send("================================================");
         
 //        exit(0);
@@ -199,5 +167,4 @@ public class GameUserplayer extends AbstractController{
         result = blanc + "B/" + noir + "N.";
         return result;
     }
-        
 }

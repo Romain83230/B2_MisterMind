@@ -14,17 +14,19 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- *
+ * 
  * @author ferre
  */
 public class DBConnection {
-    private String url = "jdbc:mysql://localhost?autoReconnect=true&useSSL=false";
+    private String url = "jdbc:mysql://localhost/mastermind?autoReconnect=true&useSSL=false";
     private String login = "root";
-    private String password ="";
+    private String password ="Asperge23@";
     private com.mysql.jdbc.Connection  connec = null;
     private com.mysql.jdbc.Statement  st = null;
     private ResultSet  rs = null;
+    public String loginJoueur;
     
     public DBConnection(){
         Initialize();
@@ -35,40 +37,19 @@ public class DBConnection {
         connec = null;
         try {
             connec = (Connection) DriverManager.getConnection(url, login, password);
-             OpenConnection();
-                String sql = "CREATE DATABASE IF NOT EXISTS mastermind;";
-                 st.executeUpdate(sql);
-                 sql ="USE mastermind;";
-                 st.executeUpdate(sql);
-                 sql ="CREATE TABLE joueur\n" +
-"(\n" +
-"    login VARCHAR(25) PRIMARY KEY NOT NULL,\n" +
-"    nom VARCHAR(25) NOT NULL,\n" +
-"    prenom VARCHAR(25 )NOT NULL,\n" +
-"    password VARCHAR(25) NOT NULL,\n" +
-"    email VARCHAR(50) NOT NULL,\n" +
-"    date_naissance DATE NOT NULL" +
-");";
-                 st.executeUpdate(sql);
-                 sql ="CREATE TABLE statistiques\n" +
-"(\n" +
-"     id INT PRIMARY KEY NOT NULL,\n" +
-"    parties_jouees INT(5) NOT NULL,\n" +
-"    parties_win INT(3) NOT NULL,\n" +
-"    parties_lose INT(3) NOT NULL,\n" +
-"    resultar_meilleure_partie INT(2) NOT NULL,\n" +
-"    date_meilleure_partie DATE NOT NULL,\n" +
-"    classement_joueur INT(2) NOT NULL,\n" +
-"    login VARCHAR(25) NOT NULL,\n" +
-"     FOREIGN KEY (login) REFERENCES joueur(login)\n" +
-")";
-                 st.executeUpdate(sql);
+        } catch (SQLException ex) {
+            try {
+                connec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost?autoReconnect=true&useSSL=false", login, password);
+                OpenConnection();
+                String sql = "CREATE DATABASE mastermind;";
+                st.executeUpdate(sql);
                 System.out.println("Base de données créée !");
                 CloseConnection();
-        } catch (SQLException ex) {
-            System.out.println("SQLException initialize: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            } catch (SQLException ex1) {
+                System.out.println("SQLException initialize: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
         }
         
         try {
@@ -111,15 +92,15 @@ public class DBConnection {
     
     }
     
-    //SELECT SUR TOUTES LES TABLES
-    public ArrayList SelectArray(String adj, String table){
+    //SELECT GLOBAL SUR TOUS LES JOUEURS
+    public ArrayList Select(String adj){
         ResultSetMetaData rsmd = null;
         ArrayList liste = new ArrayList();
             try {
                 OpenConnection();
             // or alternatively, if you don't know ahead of time that
             // the query will be a SELECT...
-                if (st.execute("SELECT " + adj +" FROM "+ table +";")) {
+                if (st.execute("SELECT " + adj +" FROM joueur;")) {
                     rs = st.getResultSet();
                     rsmd =  rs.getMetaData();
                     while(rs.next()){
@@ -145,12 +126,12 @@ public class DBConnection {
     }
     
     //SELECT PRECIS SUR UN JOUEUR
-    public String Select(String adj, String table, String colonne, String id){
+    public String Select(String adj, String player){
         ResultSetMetaData rsmd = null;
         String word = "";
             try {
                 OpenConnection();
-                if (st.execute("SELECT " + adj +" FROM" +table+ "WHERE "+ colonne +" = '" + id + "';")) {
+                if (st.execute("SELECT " + adj +" FROM joueur WHERE login = '" + player + "';")) {
                     rs = st.getResultSet();
                     rsmd =  rs.getMetaData();
                     while(rs.next()){
@@ -182,6 +163,7 @@ public class DBConnection {
                         //System.out.println("Ligne " + rs.getRow() + " : ");
                             if(rs.getString(1).equals(login) && rs.getString(2).equals(password)){
                                 System.out.println("login/mot de passe correct");
+                                loginJoueur = login;
                                 CloseConnection();
                                 return true;
                             }
@@ -199,6 +181,7 @@ public class DBConnection {
         }
     return false;
     }
+    
     public void Inscrire(String login, String nom, String prenom, String email, int jour, int mois, int annee, String password){
         try {
                 OpenConnection();
@@ -215,7 +198,7 @@ public class DBConnection {
         CloseConnection();
     }
     
-     /**
+    /**
      *
      * @param login
      * @param email

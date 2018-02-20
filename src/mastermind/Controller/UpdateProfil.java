@@ -1,21 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mastermind.Controller;
 import mastermind.View.*;
 
 /**
- *
+ * Cette classe gère la fonctionalité 'mise à jour du profil'.
  * @author ferre
  */
 public class UpdateProfil extends AbstractController{
 
+    /**
+    * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+    * @param nom le nom de l'utilisateur.
+    * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+    */
     public UpdateProfil(String nom, boolean auth) {
         super(nom, auth);
     }
     
+    /**
+     * Appelle un objet 'afficher le profil' dans un premier temps, puis propose à l'utilisateur de modifier ses informations.
+     */
     @Override
     public void perform() {
         this.setView(new UpdateprofilView(this));

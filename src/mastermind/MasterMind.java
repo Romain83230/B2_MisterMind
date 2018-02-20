@@ -17,7 +17,7 @@ public class MasterMind {
      */
     public static void main(String[] args) {
         boolean exit = false;
-        CurrentAction = new Menu(", vous n'êtes pas authentifié",false);
+        CurrentAction = new Menu("vous n'êtes pas authentifié",false);
         while(!exit) {
             String action;
             try{
@@ -37,8 +37,8 @@ public class MasterMind {
     }
     
     /**
-     * Méthode qui lance les objets correspondants en fonction
-     * @param choix
+     * Méthode qui lance la construction des objets correspondants en fonction du choix ce l'utilisateur
+     * @param choix le numéro correspondant à l'action désirée par le joueur.
      */
     public static void call(String choix) {
         switch(choix) {

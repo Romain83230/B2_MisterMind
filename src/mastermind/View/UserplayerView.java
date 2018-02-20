@@ -12,13 +12,20 @@ import mastermind.Controller.AbstractController;
  * @author ferre
  */
 public class UserplayerView extends AbstractView {
-
-    public UserplayerView(AbstractController controlleur) {
-        super(controlleur);
+    
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param controleur Le contrôleur de la fonctionnalité correspondante.
+     */
+    public UserplayerView(AbstractController controleur) {
+        super(controleur);
     }
     
+    /**
+     * 
+     */
     @Override
     public void displayDefaultMessage() {
-        System.out.println("Jeu, la machine choisi la combinaison");
+        this.send("Jeu, la machine choisi la combinaison");
     }
 }

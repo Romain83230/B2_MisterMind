@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mastermind.Controller;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +12,11 @@ import mastermind.View.*;
  */
 public class Signin extends AbstractController{
 
+    /**
+    * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+    * @param nom le nom de l'utilisateur.
+    * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+    */
     public Signin(String nom, boolean auth) {
         super(nom, auth);
     }
@@ -26,7 +26,7 @@ public class Signin extends AbstractController{
     public void perform() {
         this.setView(new SigninView(this));
         
-        Object[] tableauLogin = Database.SelectArray("login","joueur").toArray();
+        Object[] tableauLogin = Database.Select("login").toArray();
         //LOGIN
         this.getView().send("Veuillez saisir votre login :");
         String login = this.input.nextLine();

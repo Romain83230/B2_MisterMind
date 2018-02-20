@@ -5,15 +5,20 @@ import java.util.Arrays;
 import mastermind.View.*;
 
 /**
- *
+ * Classe correspondant à la fonctionalité 'le joueur génère, l'application cherche'.
  * @author ferre
  */
 public class GameUsermaster extends AbstractController {
     String combinaison;
-    ArrayList permutations;
-    ArrayList entrees;
-    ArrayList guesses;
+    ArrayList permutations; // Toutes les combinaisons possibles
+    ArrayList entrees; // Toutes les entrées envoyées par l'utilisateur.
+    ArrayList guesses; // Toutes les tentatives de l'utilisateur.
     
+    /**
+     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
+     * @param nom le nom de l'utilisateur.
+     * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+     */
     public GameUsermaster(String nom, boolean auth) {
         super(nom, auth);
     }
@@ -72,8 +77,8 @@ public class GameUsermaster extends AbstractController {
     }
     
     /**
-     * 
-     * @return 
+     * Méthode créant un tableau contenant les 15120 combinaisons possibles
+     * @return Le tableau initialisé, contenant toutes les combinaisons.
      */
     private ArrayList initArray() {
         
@@ -102,7 +107,75 @@ public class GameUsermaster extends AbstractController {
         return result;
     }
 
+    /**
+     * Cette méthode élimine toutes les combinaisons qui ne sont plus possibles, déduites en utilisant les informations 'Bien placés' et 'Mal placés' renvoyées par le joueurs.
+     * La combinaison tentée par la machine est comparée à chaque combinaison du tableau des combinaisons possibles. Si le nombre de bien placés et de mal placés correspond à celui donné par le joueur, la combinaison est conservée. Sinon, elle est éliminée.
+     * @param guess La combinaison tentée par la machine.
+     * @param BP Le nombre de combinaisons bonnes par rapport a la réponse.
+     * @param MP Le nombre de combinaisons mal placées par rapport à la réponse.
+     * @param restants Le tableau contenant les combinaisons encore possibles.
+     * @return Le tableau, duquel sont retirées toutes les combinaisons impossibles.
+     */
+    private ArrayList getRestants(String guess,int BP, int MP, ArrayList restants) {
+        ArrayList possibles = new ArrayList(0);
+        int[] differences;
+        for(int i = 0; i < restants.size(); i++) {
+            differences = this.getDifferences(guess, (String) restants.get(i));
+            if(BP == differences[0] && MP == differences[1]) {
+                possibles.add(restants.get(i));
+            }
+        }
+        
+        return possibles;
+    }
     
+    /**
+     * Compare deux combinaisons de mastermind et, à l'instar du joueur, renvoie sous forme de tableau le nombre de bons et de mauvais placements.
+     * @param guess la première chaîne à comparer
+     * @param response la seconde chaîne à comparer
+     * @return un tableau de deux entiers, l'index 0 correspond au nombre de bonnes combinaisons et le 1 au nombre de mauvaises.
+     */
+    private int[] getDifferences(String guess, String response){
+        int[] renvoi = {0,0};
+        String[] tableGuess = guess.split("");
+        String[] tableResponse = response.split("");
+        for(int i = 0; i < 5; i++) {
+            if(tableGuess[i].equals(tableResponse[i])) {
+                renvoi[0]++;
+            }
+            for(int j = 0; j < 5; j++) {
+                if(tableGuess[i].equals(tableResponse[j]) && i != j) {
+                    renvoi[1]++;
+                }
+            }
+        }
+        return renvoi;
+    }
+
+    /**
+     * Vérifie l'intégrité de l'entrée de l'utilisateur dans son format 'xBP/yMP'
+     * @param reponse L'entrée de l'utilisateur.
+     * @return Bolléen, true si l'entrée est correctement syntaxée, false si elle ne l'est pas.
+     */
+    private boolean verif(String reponse) {
+            if(reponse.length() > 6) {
+                if(reponse.substring(1, 4).equals("BP/") && reponse.substring(5, 7).equals("MP")) {
+                    try{
+                        Integer.parseInt(reponse.substring(0, 1));
+                        Integer.parseInt(reponse.substring(4, 5));
+                        return false;
+                    } catch(NumberFormatException e) {
+                        return true;
+                    }
+                }
+            }
+        return true;
+    }
+
+    /**
+     * Dans l'éventualité où le programme n'arrive pas à trouver la combinaisons proposée par le joueur, cette méthode vérifie où est ce que ça a pu déraper.
+     * @param string La combinaison correcte, finalement donnée par l'utilisateur.
+     */
     private void checkmistakes(String string) {
         char[] tableau = string.toCharArray();
         if(tableau.length != 5) {
@@ -146,67 +219,5 @@ public class GameUsermaster extends AbstractController {
             }
         }
     }
-
-    /**
-     * 
-     * @param guess
-     * @param BP
-     * @param MP
-     * @param restants
-     * @return 
-     */
-    private ArrayList getRestants(String guess,int BP, int MP, ArrayList restants) {
-        ArrayList possibles = new ArrayList(0);
-        int[] differences;
-        for(int i = 0; i < restants.size(); i++) {
-            differences = this.getDifferences(guess, (String) restants.get(i));
-            if(BP == differences[0] && MP == differences[1]) {
-                possibles.add(restants.get(i));
-            }
-        }
-        
-        return possibles;
-    }
-    /**
-     * 
-     * @param guess
-     * @param response
-     * @return 
-     */
-    private int[] getDifferences(String guess, String response){
-        int[] renvoi = {0,0};
-        String[] tableGuess = guess.split("");
-        String[] tableResponse = response.split("");
-        for(int i = 0; i < 5; i++) {
-            if(tableGuess[i].equals(tableResponse[i])) {
-                renvoi[0]++;
-            }
-            for(int j = 0; j < 5; j++) {
-                if(tableGuess[i].equals(tableResponse[j]) && i != j) {
-                    renvoi[1]++;
-                }
-            }
-        }
-        return renvoi;
-    }
-
-    /**
-     * 
-     * @param reponse
-     * @return 
-     */
-    private boolean verif(String reponse) {
-            if(reponse.length() > 6) {
-                if(reponse.substring(1, 4).equals("BP/") && reponse.substring(5, 7).equals("MP")) {
-                    try{
-                        Integer.parseInt(reponse.substring(0, 1));
-                        Integer.parseInt(reponse.substring(4, 5));
-                        return false;
-                    } catch(NumberFormatException e) {
-                        return true;
-                    }
-                }
-            }
-        return true;
-    }
 }
+
