@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class DBConnection {
     private String url = "jdbc:mysql://localhost/mastermind?autoReconnect=true&useSSL=false";
     private String login = "root";
-    private String password ="Asperge23@";
+    private String password ="";
     private com.mysql.jdbc.Connection  connec = null;
     private com.mysql.jdbc.Statement  st = null;
     private ResultSet  rs = null;

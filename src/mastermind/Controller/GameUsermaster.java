@@ -70,7 +70,7 @@ public class GameUsermaster extends AbstractController {
             this.checkmistakes(reponse);
         }
     }
-    
+     
     /**
      * 
      * @return 
@@ -101,8 +101,6 @@ public class GameUsermaster extends AbstractController {
         }
         return result;
     }
-
-    
     private void checkmistakes(String string) {
         char[] tableau = string.toCharArray();
         if(tableau.length != 5) {
@@ -164,7 +162,6 @@ public class GameUsermaster extends AbstractController {
                 possibles.add(restants.get(i));
             }
         }
-        
         return possibles;
     }
     /**
