@@ -25,7 +25,6 @@ public class DBConnection {
     private com.mysql.jdbc.Connection  connec = null;
     private com.mysql.jdbc.Statement  st = null;
     private ResultSet  rs = null;
-    public String loginJoueur;
     
     public DBConnection(){
         Initialize();
@@ -162,7 +161,6 @@ public class DBConnection {
                         //System.out.println("Ligne " + rs.getRow() + " : ");
                             if(rs.getString(1).equals(login) && rs.getString(2).equals(password)){
                                 System.out.println("login/mot de passe correct");
-                                loginJoueur = login;
                                 CloseConnection();
                                 return true;
                             }
