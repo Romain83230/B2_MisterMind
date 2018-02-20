@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mastermind;
 
 import mastermind.Controller.*;
 
 /**
- *
- * @author Romain
+ * Classe principale du programme, initie le jeu, contrôle les fonctionnalités appelées, gère le début et la fin du programme.
+ * @author ferre
  */
 public class MasterMind {
     static String nomJoueur;
@@ -17,7 +12,8 @@ public class MasterMind {
     static boolean logged;
     
     /**
-     * @param args the command line arguments
+     * Méthode main, lance le jeu.
+     * @param args le programme est lancé sans argument
      */
     public static void main(String[] args) {
         boolean exit = false;
@@ -40,6 +36,10 @@ public class MasterMind {
         System.exit(0);
     }
     
+    /**
+     * Méthode qui lance les objets correspondants en fonction
+     * @param choix
+     */
     public static void call(String choix) {
         switch(choix) {
             case "1":
