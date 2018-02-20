@@ -18,15 +18,15 @@ public class GetProfil extends AbstractController{
     @Override
     public void perform() {
         this.setView(new ProfilView(this));
-        this.getView().send("Login : " + Database.Select("login", this.getName()));
-        this.getView().send("Nom : " + Database.Select("nom", this.getName()));
-        this.getView().send("Prénom : " + Database.Select("prenom", this.getName()));
-        this.getView().send("Email : " + Database.Select("email", this.getName()));
-        this.getView().send("Appuyez sur une touche pour continuer.");
-        input.nextLine();
+        this.getView().send("Login : " + Database.Select("login", "joueur", "login", this.getName()));
+        this.getView().send("Nom : " + Database.Select("nom", "joueur", "login", this.getName()));
+        this.getView().send("Prénom : " + Database.Select("prenom", "joueur", "login", this.getName()));
+        this.getView().send("Email : " + Database.Select("email", "joueur", "login", this.getName()));
+        this.getView().send("Date de naissance : " + Database.Select("date_naissance", "joueur", "login", this.getName()));
+        
     }
     
     public String getMail(){
-        return Database.Select("email", this.getName());
+        return Database.Select("email", "joueur", "login", this.getName());
     }
 }

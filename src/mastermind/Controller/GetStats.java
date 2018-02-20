@@ -18,5 +18,11 @@ public class GetStats extends AbstractController{
     @Override
     public void perform() {
         this.setView(new StatView(this));
+        this.getView().send("Parties jouées : " + Database.Select("parties_joues", "statistiques", "login", this.getName()));
+        this.getView().send("Parties gagnées : " + Database.Select("parties_win", "statistiques", "login", this.getName()));
+        this.getView().send("Parties perdues : " + Database.Select("parties_lose", "statistiques", "login", this.getName()));
+        this.getView().send("Meilleure partie : " + Database.Select("resultat_meilleure_partie", "statistiques", "login", this.getName()));
+        this.getView().send("Classement : " + Database.Select("classement_joueur", "statistiques", "login", this.getName()));
+        
     }
 }
