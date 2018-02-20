@@ -64,9 +64,6 @@ public class GameUserplayer extends AbstractController{
     }
         
         
-        
-        
-        
          public void serieADeviner() {
         liste = new LinkedList();
         randomValues = genererFourValues();
@@ -152,10 +149,11 @@ public class GameUserplayer extends AbstractController{
         displayJoueurJoue(liste);
         this.getView().send("=============Vous avez perdu...==============");
         this.getView().send("========La bonne combinaison était :=========");
-        this.getView().send("                    ");
+        String goodAnswer = "";
         for (int i = 0; i < val.length; i++) {
-            this.getView().send(val[i] + " ");
+            goodAnswer += (val[i] + " ");
         }
+        this.getView().send(goodAnswer);
         this.getView().send("================================================");
         
 //        exit(0);
@@ -201,4 +199,5 @@ public class GameUserplayer extends AbstractController{
         result = blanc + "B/" + noir + "N.";
         return result;
     }
+        
 }
