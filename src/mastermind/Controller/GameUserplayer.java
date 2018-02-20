@@ -1,46 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package mastermind.Controller;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import mastermind.View.*;
 
-
 /**
+ * Code gérant la partie ou l'ordi choisi une combinaison, nous jouons. Les
+ * doublons sont possibles
  *
- * @author ferre
+ * @author romain
  */
-public class GameUserplayer extends AbstractController{
+public class GameUserplayer extends AbstractController {
+
     int[] valJoueur, valOrdi;
-    List liste ;
-    int[] randomValues;
+    List liste;
+    int[] randomValues = new int[5];
     String result;
-    boolean gagne;
+    boolean gagne = false;
     int foo = 0;
-    
+
     /**
-     * Constructeur manipulant les informations de la classe parente grâce à la méthode super().
-     * @param nom le nom de l'utilisateur.
-     * @param auth bolléen, true si l'utilisateur est authentifié, sinon false.
+     *
+     * @param nom
+     * @param auth
      */
     public GameUserplayer(String nom, boolean auth) {
         super(nom, auth);
     }
+
+    /**
+     *
+     */
     @Override
     public void perform() {
         this.setView(new UserplayerView(this));
-        randomValues = new int[5];
-        gagne = false;
         this.serieADeviner();
     }
-       
+
+    /**
+     * function qui génére les valeurs à deviner, et qui continue le jeu tant que le joueur n'a pas trouvé, qu'il a trouvé, ou qu'il a perdu.
+     */
     public void serieADeviner() {
         liste = new LinkedList();
-        randomValues = genererFourValues();
+        randomValues = genererFiveValues();
         int finPartie = 0;
         liste.add("                   XXXXX                    ");
         while (finPartie != 10) {
             tourParTout(finPartie);
-            
+
             if (finPartie == 9) {
                 vousAvezPerdu(randomValues);
                 break;
@@ -53,21 +66,29 @@ public class GameUserplayer extends AbstractController{
             }
             finPartie++;
             displayJoueurJoue(liste);
-        }        
+        }
     }
-         
-        public static int[] genererFourValues(){
+    
+    
+/**
+ * Génère un tableau contenant les valeurs aléatoires. 
+ * @return 
+ */
+    public static int[] genererFiveValues() {
         int[] values = new int[5];
         Random rand = new Random();
-        
+
         for (int i = 0; i < values.length; i++) {
-            values[i] = rand.nextInt((4) + 1) + 1;
+            values[i] = rand.nextInt((8) + 1) + 1;
         }
-        
+
         return values;
     }
-    
-    
+
+    /**
+     * Gére tour par tour l'entrée du joueur, et appelle la fonction qui doit analyser les entrées de l'utilisateurs. 
+     * @param tour 
+     */
     public void tourParTout(int tour) {
         String choixUser = "";
 
@@ -78,14 +99,19 @@ public class GameUserplayer extends AbstractController{
         } while (!checkInput(choixUser));
 
         foo = Integer.parseInt(choixUser);
-        result = checkInput(foo, randomValues);           
-        liste.add("            "+(tour + 1)+" : " + foo + " => " + result +  "   ");
+        result = checkInput(foo, randomValues);
+        liste.add("            " + (tour + 1) + " : " + foo + " => " + result + "   ");
 
         if ("5B/0N.".equals(result)) {
             gagne = true;
         }
     }
-    
+
+    /**
+     * Fonction de test servant à tester ce que l'utilisateur entre. 
+     * @param choixUser
+     * @return 
+     */
     private boolean checkInput(String choixUser) {
         boolean check = false;
         if (choixUser.length() < 5 || choixUser.length() > 5) {
@@ -102,14 +128,17 @@ public class GameUserplayer extends AbstractController{
         }
         return check;
     }
-    
+
+    /**
+     * fonction servant à afficher les résultats. Les strings sont envoyés à la view. 
+     * @param val 
+     */
     public void displayJoueurJoue(List val) {
         for (int i = 0; i < val.size(); i++) {
             this.getView().send(val.get(i).toString());
         }
     }
-    
-    
+
     /**
      * Appelé si uniquement le joueur n'a pas réussi à trouver la suite avant la
      * fin des 10 tours.
@@ -118,18 +147,15 @@ public class GameUserplayer extends AbstractController{
         displayJoueurJoue(liste);
         this.getView().send("=============Vous avez perdu...==============");
         this.getView().send("========La bonne combinaison était :=========");
-        this.getView().send("                    ");
+        String goodAnswer = "";
         for (int i = 0; i < val.length; i++) {
-            this.getView().send(val[i] + " ");
+            goodAnswer += (val[i] + " ");
         }
+        this.getView().send(goodAnswer);
         this.getView().send("================================================");
-        
+
 //        exit(0);
     }
-    
-    
-    
-    
 
     /**
      * Check les propositions du joueur. 3 possibilités : aucune bonne réponse.
@@ -154,11 +180,11 @@ public class GameUserplayer extends AbstractController{
 
         for (int i = 0; i < ordi.length; i++) {
             if (choixJoueur[i] == ordi[i]) {
-                    blanc++;
-                    continue;
-                }
+                blanc++;
+                continue;
+            }
             for (int j = 0; j < ordi.length; j++) {
-                
+
                 if (choixJoueur[i] == ordi[j] && choixJoueur[j] == ordi[i]) {
                     noir++;
                 }
@@ -167,4 +193,5 @@ public class GameUserplayer extends AbstractController{
         result = blanc + "B/" + noir + "N.";
         return result;
     }
+
 }
