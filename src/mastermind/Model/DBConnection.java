@@ -39,7 +39,15 @@ public class DBConnection {
             try {
                 connec = (Connection) DriverManager.getConnection("jdbc:mysql://localhost?autoReconnect=true&useSSL=false", login, password);
                 OpenConnection();
-                String sql = "CREATE DATABASE mastermind;";
+                String sql = "CREATE DATABASE mastermind;CREATE TABLE joueur\n" +
+"(\n" +
+"    login VARCHAR(25) PRIMARY KEY NOT NULL,\n" +
+"    nom VARCHAR(25) NOT NULL,\n" +
+"    prenom VARCHAR(25 )NOT NULL,\n" +
+"    password VARCHAR(25) NOT NULL,\n" +
+"    email VARCHAR(50) NOT NULL,\n" +
+"    date_naissance DATE NOT NULL \n" +
+") ";
                 st.executeUpdate(sql);
                 System.out.println("Base de données créée !");
                 CloseConnection();
