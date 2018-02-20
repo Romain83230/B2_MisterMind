@@ -27,12 +27,12 @@ public class UpdateProfil extends AbstractController{
         this.getView().send("Nouveau mot de passe:");
         String password = this.input.nextLine();
 
-        //this.getView().send("Nouvelle adresse mail ["+ profil.getMail() + "]:");
-        //String mail = this.input.nextLine();
-        //if(mail.equals("")){
-        //    mail = profil.getMail();
-        //}
+        this.getView().send("Nouvelle adresse mail ["+ profil.getMail() + "]:");
+        String mail = this.input.nextLine();
+        if(mail.equals("")){
+           mail = profil.getMail();
+        }
 
-        //this.Database.UpdateProfil(this.getName(), mail, password);
+        this.Database.UpdateProfil(this.getName(), mail, password);
     }
 }
