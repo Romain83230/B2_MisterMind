@@ -26,7 +26,7 @@ public class Signin extends AbstractController{
     public void perform() {
         this.setView(new SigninView(this));
         
-        Object[] tableauLogin = Database.Select("login").toArray();
+        Object[] tableauLogin = Database.SelectArray("login","joueur").toArray();
         //LOGIN
         this.getView().send("Veuillez saisir votre login :");
         String login = this.input.nextLine();
