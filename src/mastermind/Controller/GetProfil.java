@@ -15,7 +15,11 @@ public class GetProfil extends AbstractController{
     public GetProfil(String nom, boolean auth) {
         super(nom, auth);
     }
+    /**
+     * Affiche les différentes informations du profil
+     */
     @Override
+    
     public void perform() {
         this.setView(new ProfilView(this));
         this.getView().send("Login : " + Database.Select("login", "joueur", this.getName()));
@@ -25,7 +29,10 @@ public class GetProfil extends AbstractController{
         this.getView().send("Date de naissance : " + Database.Select("date_naissance", "joueur", this.getName()));
         
     }
-    
+    /**
+     * 
+     * @return l'email du joueur 
+     */
     public String getMail(){
         return Database.Select("email", "joueur", this.getName());
     }

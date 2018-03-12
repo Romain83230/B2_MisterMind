@@ -172,7 +172,11 @@ public class GameUserplayer extends AbstractController{
         result = blanc + "B/" + noir + "N.";
         return result;
     }
-    
+    /**
+     * Accède a la base de données pour modifier les statistiques
+     * @param nombreCoup nombre de tours du joueur
+     * @param gagner  true si la partie est gagnée sinon false
+     */
     private void AjouterStat(int nombreCoup, boolean gagner){
         try {
             Database.AddStat(nombreCoup, gagner, this.getName());

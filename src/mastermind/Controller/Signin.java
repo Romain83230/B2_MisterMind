@@ -21,7 +21,11 @@ public class Signin extends AbstractController{
         super(nom, auth);
     }
 
-
+/**
+ * Lance la phase d'inscription en vérifiant que le login n'existe pas déjà
+ * en vérifiant que les différentes contraites respectées
+ * Une fois l'inscription terminée, les données sont envoyées sur la base de données
+ */
     @Override
     public void perform() {
         this.setView(new SigninView(this));
@@ -62,17 +66,6 @@ public class Signin extends AbstractController{
         }
         //DATE DE NAISSANCE
         this.getView().send("Veuillez saisir votre date de naissance au format JJMMAAAA :");
-        /*while (true)
-            try {
-                String naiss = sc.nextLine();
-                while(naiss.length() != 8){
-                    naiss = sc.nextLine();
-                }
-                naissance = Integer.parseInt(naiss);
-                break;
-            } catch (NumberFormatException nfe) {
-                System.out.println("Veuillez saisir votre date de naissance au format JJMMAAAA :");
-            }*/
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         String naissance;
         int annee;
