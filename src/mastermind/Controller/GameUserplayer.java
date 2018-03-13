@@ -124,9 +124,11 @@ public class GameUserplayer extends AbstractController{
         this.getView().send("=============Vous avez perdu...==============");
         this.getView().send("========La bonne combinaison était :=========");
         this.getView().send("                    ");
+        String results = "";
         for (int i = 0; i < val.length; i++) {
-            this.getView().send(val[i] + " ");
+            results += val[i];
         }
+        this.getView().send(results);
         this.getView().send("================================================");
         
 //        exit(0);

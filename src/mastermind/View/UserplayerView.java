@@ -26,6 +26,7 @@ public class UserplayerView extends AbstractView {
      */
     @Override
     public void displayDefaultMessage() {
-        this.send("Jeu, la machine choisi la combinaison");
+        this.send("BIENVENUE");
+        this.send("J'ai choisi ma combinaison, à vous de la deviner ;-) Have fun !");
     }
 }
